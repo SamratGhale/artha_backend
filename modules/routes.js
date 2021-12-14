@@ -1,4 +1,3 @@
-const Doctor = require('./doctors/doctors.routes')
 const Admin = require('./admin/admin.routes')
 const Inventory = require('./inventory/inventory.routes')
 

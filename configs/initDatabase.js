@@ -1,7 +1,7 @@
 const mongo = require('mongoose')
 const {Schema} =  mongo;
 
-mongo.connect('mongodb://localhost:27017/hospital')
+mongo.connect('mongodb://localhost:27017/artha')
 
 const DoctorSchema = Schema({
     name: String,

@@ -5,18 +5,18 @@ const commonSchema = require('../../helpers/schema');
 const schema = {
   email: { type: String, joi: Joi.string().email().optional().description("Admin email") },
   password: { type: String , required: true},
-  is_admin:{ type: Boolean, default: true},
-  token: {type: String},
+  role: {type: String , required: false},
+  is_approved :{type:Boolean, required: true},
   ...commonSchema,
 };
 
-const AdminSchema = mongoose.Schema(schema, {
-  collection: 'admin',
+const UserSchema = mongoose.Schema(schema, {
+  collection: 'User',
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
   toObject: { virtuals: true },
   toJSON: { virtuals: true },
 });
 
-AdminSchema.index({ email : 1 }, { unique: true });
+UserSchema.index({ email : 1 }, { unique: true });
 
-module.exports = mongoose.model('admin', AdminSchema);
+module.exports = mongoose.model('User', UserSchema);

@@ -1,4 +1,4 @@
-const { ROLE_ADMIN, USER } = require('../../constants/permissions');
+const { USER } = require('../../constants/permissions');
 const controllers = require('./user.controllers');
 const validators = require('./user.validators');
 
@@ -21,19 +21,7 @@ const routes = {
     },
     permissions: [USER.WRITE, USER.ADMIN]
   },
-  login: {
-    method: 'POST',
-    path: '/login',
-    description: 'User Login',
-    uploadPayload: {
-      output: 'stream',
-      parse: true,
-      multipart: true,
-      allow: 'multipart/form-data',
-    },
-  },
-  changePassword: {
-    method: 'PUT',
+  changePassword: { method: 'PUT',
     path: '/changepassword/{token}',
     description: 'Change User password',
     uploadPayload: {
@@ -55,22 +43,23 @@ const routes = {
     description: 'Update user',
     permissions: [USER.WRITE, USER.ADMIN]
   },
-  auth: {
-    method: 'GET',
-    path: '/auth/access_token={token}',
-    description: 'Verify Token',
-  },
   findById: {
     method: 'GET',
     path: '/{id}',
     description: 'Get user by id',
     permissions: [USER.READ, USER.ADMIN]
   },
+  findByRoles: {
+    method: 'GET',
+    path: '/role/{role}',
+    description: 'Get users by role',
+    permissions: [USER.READ, USER.ADMIN]
+  },
 };
 
 function register(app) {
   app.register({
-    name: 'User',
+    name: 'user',
     routes,
     validators,
     controllers,

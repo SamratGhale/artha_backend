@@ -202,6 +202,7 @@ class App {
       this.registerController(name, operationName, controllers[operationName]);
       if (Array.isArray(route)) {
         route = {
+          cors:true,
           method: route[0],
           path: route[1],
           description: route[2],

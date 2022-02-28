@@ -2,7 +2,6 @@ const UserModel = require('./user.model')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const DataUtils  = require('../../helpers/data');
-const req = require('express/lib/request');
 const Role= require('./role.controllers').Role;
 require('dotenv').config();
 
@@ -42,7 +41,6 @@ const User= {
         return {user, permissions};
     },
     async auth(request) {
-        console.log(request);
         try {
             const token =
                 request.params.token|| request.headers.access_token || request.cookies.access_token;
@@ -57,7 +55,6 @@ const User= {
         }
     },
     async changePassword(req){
-        console.log(req.headers);
         token = req.headers.access_token;
         const { oldPassword,newPassword} = req.payload;
         const decoded = jwt.verify(token, process.env.TOKEN_KEY);
@@ -72,7 +69,6 @@ const User= {
                     return {message: "Password change successfully"};
                 }
             }catch(err){
-                console.log(err);
                 throw err;
             }
         } else {
@@ -123,8 +119,7 @@ const User= {
                         process.env.TOKEN_KEY,
                     );
                     permissions = await Role.getPermissions(user.role);
-                    user.token = token;
-                    return { role : user.role, permissions, token, email,  user_id :  user._id}
+                    return {user, permissions, token};
                 }
                 else{
                     throw {message :"Invalid password", code: 400};

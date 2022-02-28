@@ -21,13 +21,14 @@ const server = new Hapi.Server({
     stripTrailingSlash: true,
   },
   routes: {
-    cors: {
-      origin:['*'],
-      additionalHeaders: ['cache-control', 'x-requested-with', 'access_token'],
+    cors:
+    {
+      origin:["*"],
+      additionalHeaders: ['cache-control', 'x-requested-with', 'X_AUTH_TOKEN']
+
     },
     validate: {
       failAction: async (request, h, err) => {
-        if (process.env.NODE_ENV === 'production') {
           // In prod, log a limited error message and throw the default Bad Request error.
           return h
             .response({
@@ -39,8 +40,6 @@ const server = new Hapi.Server({
             .takeover();
         }
         // During development, log and respond with the full error.
-        return err;
-      },
     },
   },
 });

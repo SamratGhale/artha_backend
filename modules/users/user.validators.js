@@ -1,7 +1,7 @@
 const Joi = require('joi-oid');
 
 module.exports = {
-  getById: {
+  findById: {
     params: Joi.object({
       id: Joi.objectId(),
     }),
@@ -13,15 +13,21 @@ module.exports = {
       role: Joi.string().optional().description("user role")
     }),
   },
+  auth: {
+    params: Joi.object({
+      token: Joi.string(),
+    }),
+  },
   login: {
     payload: Joi.object({
       email: Joi.string().optional().description('user email'),
       password: Joi.string().optional().description('user password'),
     }),
   },
+
   changePassword: {
     payload: Joi.object({
-      oldPassword : Joi.string().description('user email'),
+      oldPassword: Joi.string().description('user email'),
       newPassword: Joi.string().description('user password'),
     }),
   },
@@ -38,16 +44,6 @@ module.exports = {
       email: Joi.string().optional().description('user email'),
       password: Joi.string().optional().description('user password'),
       role: Joi.string().optional().description("user role")
-    }),
-  },
-  auth: {
-    params: Joi.object({
-      token: Joi.string(),
-    }),
-  },
-  findById: {
-    params: Joi.object({
-      id: Joi.objectId(),
     }),
   },
   findByRoles: {

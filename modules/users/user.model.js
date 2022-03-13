@@ -13,9 +13,13 @@ const schema = {
 const UserSchema = mongoose.Schema(schema, {
   collection: 'User',
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
-  toObject: { virtuals: true },
-  toJSON: { virtuals: true },
 });
+
+UserSchema.methods.toJSON =function(){
+  var obj = this.toObject();
+  delete obj.password;
+  return obj;
+}
 
 UserSchema.index({ email : 1 }, { unique: true });
 

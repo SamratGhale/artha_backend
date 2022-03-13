@@ -46,6 +46,7 @@ const User= {
                 request.params.token|| request.headers.access_token || request.cookies.access_token;
             const { user, permissions } = await User.validateToken(token);
 
+            delete user.password;
             return {
                 user,
                 permissions,
@@ -111,11 +112,11 @@ const User= {
             if (!(email && password)) {
                 throw "All input is required";
             }
-            const user = await UserModel.findOne({ email });
+            var user = await UserModel.findOne({ email });
             if (user) {
                 if(await bcrypt.compare(password, user.password)){
                     const token = jwt.sign(
-                        {user_id : user._id, email, is_admin: user.is_admin},
+                        {user_id : user._id, email, role: user.role},
                         process.env.TOKEN_KEY,
                     );
                     permissions = await Role.getPermissions(user.role);

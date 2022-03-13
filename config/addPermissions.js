@@ -48,10 +48,17 @@ const roleAdder = async () => {
     console.log('Staff Manager Role Added');
 }
 const userAdder=async()=>{
+	/*
     await User.register({
         email:'samrat.biz19@gmail.com',
         password:'admin123',
         role: "SUPER ADMIN"
+    })
+	*/
+    await User.register({
+        email:'staff@gmail.com',
+        password:'staff123',
+        role: "STAFF"
     })
 }
 

@@ -6,10 +6,11 @@ const Vision = require('@hapi/vision');
 const HapiSwagger = require('hapi-swagger');
 const app = require('./app');
 const registerFeats = require('./boot/register-modules')
+require('dotenv').config();
 
 const port = 4000;
 
-const db = 'mongodb://localhost:27017/artha'
+const db = process.env.DATABASE_URL 
 
 mongoose.connect(db, {
   useNewUrlParser: true,

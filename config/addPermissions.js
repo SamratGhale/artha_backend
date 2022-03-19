@@ -1,7 +1,8 @@
 const mongo = require('mongoose');
 const RoleController = require('../modules/users/role.controllers')
 const UserController = require('../modules/users/user.controllers')
-mongo.connect('mongodb://localhost:27017/artha')
+require('dotenv').config();
+mongo.connect(process.env.DATABASE_URL)
 
 Role = RoleController.Role;
 User = UserController.User;
@@ -48,13 +49,11 @@ const roleAdder = async () => {
     console.log('Staff Manager Role Added');
 }
 const userAdder=async()=>{
-	/*
     await User.register({
         email:'samrat.biz19@gmail.com',
-        password:'admin123',
+        password:'9828',
         role: "SUPER ADMIN"
     })
-	*/
     await User.register({
         email:'staff@gmail.com',
         password:'staff123',
@@ -64,4 +63,4 @@ const userAdder=async()=>{
 
 userAdder();
 
-//roleAdder();
+roleAdder();

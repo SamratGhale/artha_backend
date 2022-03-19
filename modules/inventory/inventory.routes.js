@@ -13,7 +13,7 @@ const routes = {
       multipart: true,
       allow: "multipart/form-data",
     },
-    //permissions: ["admin"],
+    permissions: ["admin"],
   },
   register: {
     method: "POST",

@@ -1,3 +1,4 @@
+const { ROLE_ADMIN, INVENTORY } = require("../../constants/permissions");
 const controllers = require("./inventory.controllers");
 const validators = require("./inventory.validators");
 
@@ -13,7 +14,7 @@ const routes = {
       multipart: true,
       allow: "multipart/form-data",
     },
-    permissions: ["admin"],
+    permissions: [INVENTORY.WRITE],
   },
   register: {
     method: "POST",

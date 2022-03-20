@@ -19,7 +19,7 @@ const routes = {
       multipart: true,
       allow: 'multipart/form-data',
     },
-    permissions: [USER.WRITE, USER.ADMIN]
+    //permissions: [USER.WRITE, USER.ADMIN]
   },
   changePassword: { method: 'PUT',
     path: '/changepassword/{token}',

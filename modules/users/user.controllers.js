@@ -88,7 +88,12 @@ const User= {
         role = role.toUpperCase();
 
         if(!(email && password)){
-            return "All input is required";
+            throw "All input is required";
+        }
+
+        const u= await UserModel.findOne({email: email});
+        if(u){
+            throw {message: "User email already exists!", code:400};
         }
         const salt = process.env.TOKEN_KEY;
         encrypted_password = await bcrypt.hash(password, parseInt(salt));

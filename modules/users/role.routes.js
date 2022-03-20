@@ -4,7 +4,7 @@ const { ROLE_ADMIN } = require('../../constants/permissions');
 
 const routes = {
   add: ['POST', '', 'Add a new role', ROLE_ADMIN],
-  list: ['GET', '', 'Get all the roles', ROLE_ADMIN],
+  list: ['GET', '', 'Get all the roles'],
   get: ['GET', '/{id}', 'Get a role by id', ROLE_ADMIN],
   delete: ['DELETE', '/{id}', 'Delete a role by id', ROLE_ADMIN],
   getPermissions: ['GET', '/permissions/{name}', 'Get permissions list by role'],

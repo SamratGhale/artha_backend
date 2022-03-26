@@ -37,7 +37,7 @@ const User= {
         if(!user){
             throw {message: "Token not correct please login and try again!", code:400};
         }
-        permissions = await Role.getPermissions(user.role);
+        const permissions = await Role.getPermissions(user.role);
         return {user, permissions};
     },
     async auth(request) {

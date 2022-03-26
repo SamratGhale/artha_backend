@@ -1,9 +1,15 @@
 const InventorymentModel = require("./inventory.model");
 const DataUtils = require("../../helpers/data");
+const parse = require('mongoose-parse');
 
 const Inventory= {
   async add(data) {
-    return await InventorymentModel.create(data);
+    try{
+      const res = await InventorymentModel.create(data);
+      return res;
+    }catch(err){
+      throw {message:"Could't add the item please try again", code:400};
+    }
   },
   async list(start, limit, from) {
     const $match = { is_archived: false };

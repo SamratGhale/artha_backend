@@ -3,7 +3,7 @@ const controllers = require("./inventory.controllers");
 const validators = require("./inventory.validators");
 
 const routes = {
-  list: ["GET", "", "List all Items"],
+  list: ["GET", "", "List all Items",[INVENTORY.READ]],
   update: {
     method: "PUT",
     path: "/update/{id}",

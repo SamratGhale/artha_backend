@@ -7,7 +7,7 @@ const Secure = async (reoutePermissions, req) => {
   if (!token) throw Error('No access token was sent');
 
   try {
-    const decoded = User.validateToken(token);
+    const decoded = await User.validateToken(token);
     const {user, permissions} = decoded;
     return permissions.some((permission)=>reoutePermissions.includes(permission));
   } catch (e) {

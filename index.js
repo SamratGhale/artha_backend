@@ -25,8 +25,7 @@ const server = new Hapi.Server({
     cors:
     {
       origin:["*"],
-      additionalHeaders: ['cache-control', 'x-requested-with', 'X_AUTH_TOKEN']
-
+      additionalHeaders: ['cache-control', 'x-requested-with', 'X_AUTH_TOKEN','access_token']
     },
     validate: {
       failAction: async (request, h, err) => {

@@ -10,7 +10,7 @@ module.exports = {
     payload: Joi.object({
       item_name: Joi.string().description("Item's Name"),
       item_price: Joi.number().description("Item's price"),
-      item_code: Joi.number().description("Itemss code"),
+      item_code: Joi.string().description("Itemss code"),
       discount: Joi.number().description("discount percent"),
       quantity: Joi.number().description("quantity of items"),
       item_description: Joi.string()

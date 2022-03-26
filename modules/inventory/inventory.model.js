@@ -48,6 +48,6 @@ const InventorySchema = mongoose.Schema(schema, {
   toJSON: { virtuals: true },
 });
 
-InventorySchema.index({ email: 1 }, { unique: true });
+InventorySchema.index({ item_code: 1 }, { unique: true });
 
 module.exports = mongoose.model("inventory", InventorySchema);

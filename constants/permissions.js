@@ -11,6 +11,11 @@ module.exports = {
         WRITE:  'inventory_write',
         REMOVE: 'inventory_remove',
     },
+    INVOICE:{
+        READ:   'invoice_read',
+        WRITE:  'invoice_write',
+        REMOVE: 'invoice_remove',
+    },
     ADMIN: 'app_admin',
     ROLE_ADMIN: 'app_admin',
 };

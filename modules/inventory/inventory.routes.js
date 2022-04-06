@@ -1,4 +1,4 @@
-const { ROLE_ADMIN, INVENTORY } = require("../../constants/permissions");
+const { INVENTORY } = require("../../constants/permissions");
 const controllers = require("./inventory.controllers");
 const validators = require("./inventory.validators");
 
@@ -26,12 +26,13 @@ const routes = {
       multipart: true,
       allow: "multipart/form-data",
     },
+    permissions: [INVENTORY.WRITE],
   },
   archive: {
     method: "DELETE",
     path: "/{id}",
     description: "Archive the item",
-    //permissions: ["admin"],
+    permissions: [INVENTORY.REMOVE],
   },
   decreaseItem: {
     method: "PUT",
@@ -43,7 +44,7 @@ const routes = {
       multipart: true,
       allow: "multipart/form-data",
     },
-    //permissions: ["admin"],
+    permissions: [INVENTORY.WRITE],
   },
   increaseItem: {
     method: "PUT",
@@ -55,12 +56,13 @@ const routes = {
       multipart: true,
       allow: "multipart/form-data",
     },
-    //permissions: ["admin"],
+    permissions: [INVENTORY.WRITE],
   },
   getById: {
     method: "GET",
     path: "/{id}",
     description: "Get item by id",
+    permissions: [INVENTORY.READ]
   },
 };
 

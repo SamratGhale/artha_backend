@@ -1,6 +1,5 @@
 const InventorymentModel = require("./inventory.model");
 const DataUtils = require("../../helpers/data");
-const parse = require('mongoose-parse');
 
 const Inventory= {
   async add(data) {
@@ -26,8 +25,6 @@ const Inventory= {
   },
   async getById(_id) {
     const ret = await InventorymentModel.findOne({ _id, is_archived: false });
-    const dis_amount = ret.item_price * (ret.discount / 100);
-    ret.new_price = ret.item_price - dis_amount;
     return ret;
   },
   async update(id, data) {

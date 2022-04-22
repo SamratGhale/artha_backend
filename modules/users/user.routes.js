@@ -37,6 +37,12 @@ const routes = {
     description: 'Archive user',
     permissions: [USER.WRITE, USER.ADMIN]
   },
+  approve: {
+    method: 'PUT',
+    path: '/{id}',
+    description: 'approve user',
+    permissions: [USER.ADMIN]
+  },
   update: {
     method: 'POST',
     path: '/{id}/update',

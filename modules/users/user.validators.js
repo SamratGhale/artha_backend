@@ -36,6 +36,11 @@ module.exports = {
       id: Joi.objectId(),
     }),
   },
+  approve: {
+    params: Joi.object({
+      id: Joi.objectId(),
+    }),
+  },
   update: {
     params: Joi.object({
       id: Joi.objectId(),

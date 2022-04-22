@@ -27,6 +27,7 @@ const User= {
     },
 
     async update(request) {
+        console.log(request.payload);
         const res = await UserModel.findOneAndUpdate({_id: request.params.id}, request.payload);
         return res;
     },
@@ -144,7 +145,7 @@ const User= {
         return UserModel.findOneAndUpdate({ _id: id, is_archived: false }, { is_archived: true });
     },
     async approve(id) {
-        return UserModel.findOneAndUpdate({ _id: id, is_approved: true}, {is_archived: true });
+        return UserModel.findOneAndUpdate({ _id: id }, [{$set:{is_approved:{$eq:[false,"$is_approved"]}}}]);
     },
 }
 
@@ -161,6 +162,7 @@ module.exports = {
     register: (req) =>     User.register(req.payload),
     login: (req) =>        User.login(req.payload),
     archive: (req) =>      User.archive(req.params.id),
+    approve: (req) =>      User.approve(req.params.id),
     findById: (req) =>      User.findById(req.params.id),
     findByRoles: (req) =>      User.findByRoles(req.params.role),
     validateToken : (req) =>  User.validateToken(req.params.token),

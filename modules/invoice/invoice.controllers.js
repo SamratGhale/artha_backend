@@ -13,13 +13,52 @@ const Invoice = {
     },
 
     async list(start, limit, from) {
-        return await InvoiceModel.find();
+        const invoice = await InvoiceModel.aggregate(
+            [{$lookup:{
+                from: "User",
+                localField: "staff_id",
+                foreignField : "_id",
+                as:"staff"
+            }},
+            {
+                $project:{
+                    "staff.password":0,
+                    "staff.dateOfBirth":0,
+                    "staff.is_archived":0,
+                    "staff.is_registered":0,
+                    "staff.role":0,
+                    "staff.created_at":0,
+                    "staff.updated_at":0,
+                    "staff.__v":0
+                }
+            }]
+        )
+        return invoice;
     },
 
     async getById(_id) {
-        const invoice = await InvoiceModel.findOne({ _id, is_archived: false });
-        const items = await InvoiceItemModel.find({ invoice_id: _id, is_archived: false });
-        return { invoice, items };
+        const invoice = await InvoiceModel.findOne({ _id, is_archived: false }).lean();
+        const items = await InvoiceItemModel.aggregate([
+            {
+                $match: {
+                    $expr: {
+                        $eq: ['$invoice_id', { $toObjectId: _id },
+                        ]
+                    }
+                }
+            },
+            {
+                $lookup: {
+                    from: "inventory",
+                    localField: "item_id",
+                    foreignField: "_id",
+                    as: "item"
+                }
+            },
+        ]);        
+        console.log(items)
+        invoice.items= items;
+        return invoice;
     },
 
     async addItem(_id, data) {
